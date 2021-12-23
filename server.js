@@ -40,6 +40,36 @@ server.post('/dinos', async (req, res) => {
   }
 });
 
+server.put('/dinos/:dinoId', async (req, res) => {
+  const dinoId = req.params.dinoId;
+  const dino = req.body;
+  //Dino suchen und updaten. Parameter: (ID, Dino, { Zeige den geänderten Satz an})
+  const result = await Dino.findByIdAndUpdate(dinoId, dino, {
+    returnDocument: 'after',
+  });
+  res.json(result);
+});
+
+server.delete('/dinos/:dinoId', async (req, res) => {
+  const dinoId = req.params.dinoId;
+  try {
+    const result = await Dino.findByIdAndDelete(dinoId);
+    if (result) {
+      res.json({
+        success: true,
+        status: 'Dino successfully deleted',
+      });
+    } else {
+      res.json({
+        success: false,
+        status: 'Deletion went wrong!',
+      });
+    }
+  } catch (error) {
+    res.json({ status: 'Something went wrong!' });
+  }
+});
+
 server.listen(4000, () => {
   console.log('Dino-Server is up and running');
 });
