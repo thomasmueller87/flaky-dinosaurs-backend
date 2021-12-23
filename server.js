@@ -1,7 +1,6 @@
 import express from "express";
-import { MongoClient, ObjectId } from "mongodb";
-
-const connectionString = "mongodb://localhost:27017/";
+import { ObjectId } from "mongodb";
+import databaseClient from "./lib/db.client.js";
 
 const server = express();
 
@@ -10,9 +9,8 @@ server.use(express.json());
 server.get("/dinos/:dinoId", async (req, res) => {
   const dinoId = req.params.dinoId;
 
-  const client = new MongoClient(connectionString);
-  await client.connect();
-  const db = client.db("flaky-dinosaurs");
+  await databaseClient.connect();
+  const db = databaseClient.db("flaky-dinosaurs");
   const collection = db.collection("dinosaurs");
 
   const dino = await collection.findOne({ _id: ObjectId(dinoId) });
@@ -20,9 +18,8 @@ server.get("/dinos/:dinoId", async (req, res) => {
 });
 
 server.get("/dinos", async (req, res) => {
-  const client = new MongoClient(connectionString);
-  await client.connect();
-  const db = client.db("flaky-dinosaurs");
+  await databaseClient.connect();
+  const db = databaseClient.db("flaky-dinosaurs");
   const collection = db.collection("dinosaurs");
 
   const dinos = await collection.find().toArray();
@@ -35,9 +32,9 @@ server.post("/dinos", async (req, res) => {
     type: req.body.type,
     vegan: req.body.vegan,
   };
-  const client = new MongoClient(connectionString);
-  await client.connect();
-  const db = client.db("flaky-dinosaurs");
+
+  await databaseClient.connect();
+  const db = databaseClient.db("flaky-dinosaurs");
 
   //Sammlung aller Dokumente
   const collection = db.collection("dinosaurs");
