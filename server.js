@@ -1,6 +1,13 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import {
+  getCategories,
+  getCategory,
+  postCategory,
+  putCategory,
+  deleteCategory,
+} from './controllers/categories.controller.js';
+import {
   getProducts,
   getProduct,
   postProduct,
@@ -25,3 +32,9 @@ server.get('/products/:productId', getProduct);
 server.post('/products', postProduct);
 server.put('/products/:productId', putProduct);
 server.delete('/products/:productId', deleteProduct);
+
+server.get('/categories', getCategories);
+server.get('/categories/:categoryId', getCategory);
+server.post('/categories', postCategory);
+server.put('/categories/:categoryId', putCategory);
+server.delete('/categories/:categoryId', deleteCategory);
