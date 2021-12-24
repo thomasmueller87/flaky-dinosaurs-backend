@@ -1,34 +1,27 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import {
-  getDinos,
-  getDino,
-  postDino,
-  putDino,
-  deleteDino,
-} from './controllers/dinos.controller.js';
+  getProducts,
+  getProduct,
+  postProduct,
+  putProduct,
+  deleteProduct,
+} from './controllers/products.controller.js';
 
 const server = express();
 //Server Port
 server.listen(4000, () => {
-  console.log('Dino-Server is up and running on Port 4000');
+  console.log('Xmas-Server is up and running on Port 4000');
 });
 
-const connectionString =
-  'mongodb://localhost:27017/flaky-dinosaurs';
+const connectionString = 'mongodb://localhost:27017/xmas-app';
 
 mongoose.connect(connectionString);
 
 server.use(express.json());
-//Alle Dinos holen
-server.get('/dinos', getDinos);
 
-//Einzelne Dinos mit ID laden
-server.get('/dinos/:dinoId', getDino);
-
-//Erstelle neuen Dino
-server.post('/dinos', postDino);
-//Aendere Dino
-server.put('/dinos/:dinoId', putDino);
-//Delete Dino
-server.delete('/dinos/:dinoId', deleteDino);
+server.get('/products', getProducts);
+server.get('/products/:productId', getProduct);
+server.post('/products', postProduct);
+server.put('/products/:productId', putProduct);
+server.delete('/products/:productId', deleteProduct);
