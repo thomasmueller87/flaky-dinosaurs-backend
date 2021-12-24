@@ -1,7 +1,5 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import Dino from './models/dino.model.js';
-
 import {
   getDinos,
   getDino,
