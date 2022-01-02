@@ -1,13 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import {
-  getCategories,
-  getCategory,
-  postCategory,
-  putCategory,
-  deleteCategory,
-} from './controllers/categories.controller.js';
+
 import productsRoutes from './routes/products.routes.js';
+import catergoryRoutes from './routes/categories.routes.js';
 
 const server = express();
 //Server Port
@@ -22,9 +17,4 @@ mongoose.connect(connectionString);
 server.use(express.json());
 
 server.use(productsRoutes);
-
-server.get('/categories', getCategories);
-server.get('/categories/:categoryId', getCategory);
-server.post('/categories', postCategory);
-server.put('/categories/:categoryId', putCategory);
-server.delete('/categories/:categoryId', deleteCategory);
+server.use(catergoryRoutes);
