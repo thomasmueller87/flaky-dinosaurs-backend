@@ -9,6 +9,8 @@ import {
 
 const router = express.Router();
 
+//comment
+
 router.get('/categories', getCategories);
 router.get('/categories/:categoryId', getCategory);
 router.post('/categories', postCategory);
