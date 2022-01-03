@@ -23,10 +23,11 @@ const postProduct = async (req, res) => {
   try {
     const result = await product.save();
     // Ergebnis auswerten und ID an den Nutzer senden.
+    console.log(result._id);
     res.json({
       message:
         'Successfully inserted a new product with ID: ' +
-        result._Id,
+        result._id,
     });
   } catch (error) {
     res.json(error);

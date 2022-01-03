@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 import productsRoutes from './routes/products.routes.js';
 import catergoryRoutes from './routes/categories.routes.js';
@@ -15,6 +16,7 @@ const connectionString = 'mongodb://localhost:27017/xmas-app';
 mongoose.connect(connectionString);
 
 server.use(express.json());
+server.use(cors());
 
 server.use(productsRoutes);
 server.use(catergoryRoutes);

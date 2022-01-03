@@ -21,7 +21,7 @@ const postCategory = async (req, res) => {
     res.json({
       message:
         'Successfully inserted a new Category with ID: ' +
-        result._Id,
+        result._id,
     });
   } catch (error) {
     res.json(error);
